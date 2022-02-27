@@ -1,0 +1,19 @@
+{% import 'macros.html' as m %}
+{% extends 'base.html' %}
+{% block title %}
+    Hello Page
+{% endblock %}
+{% block content %}
+<h1>
+    {{data.tittle}}
+</h1>
+<h2>
+    {{subtittle}}
+</h2>
+<p>
+    Hello user with ip :{{ data.user_ip }}
+</p>
+{{m.safe(decorate('ANDY'))}}
+<br>
+<img src="{{url_for('static', filename='images/example.jfif')}}" alt="hi" />
+{% endblock %}
