@@ -17,6 +17,7 @@ app.config['ENV'] = 'development'
 app.config['SECRET_KEY'] = 'ANDY'
 bootstrap = Bootstrap(app)
 
+
 class LoginForm(FlaskForm):
     username = StringField('Nombre de usuario', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
