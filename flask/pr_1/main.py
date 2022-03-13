@@ -10,13 +10,11 @@ from wtforms.fields import StringField, PasswordField
 from wtforms.fields import SubmitField
 from wtforms.validators import DataRequired
 
-
 # __name__ Nombre del archivo
 app = Flask(__name__)
 app.config['ENV'] = 'development'
 app.config['SECRET_KEY'] = 'ANDY'
 bootstrap = Bootstrap(app)
-
 
 class LoginForm(FlaskForm):
     username = StringField('Nombre de usuario', validators=[DataRequired()])
@@ -26,7 +24,6 @@ class LoginForm(FlaskForm):
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html', error=error)
-
 
 @app.route('/')
 def index():
