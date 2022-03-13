@@ -4,6 +4,7 @@ from flask import make_response
 from flask import redirect
 from flask import render_template
 from flask import session
+from flask import url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField
@@ -33,19 +34,27 @@ def index():
     #response.set_cookie('user_ip', user_ip)
     return response
 
-@app.route('/hello')
+@app.route('/hello', methods=['GET', 'POST'])
 def hello():
     user_ip = session.get('user_ip')
+    login_form = LoginForm()
+    username = session.get('username')
+    print(user_ip)
     #user_ip = request.cookies.get('user_ip')
     data = {
         'user_ip': user_ip,
-        'tittle':"TITULO PRINCIPAL",
+        'tittle':"BIENVENIDO",
     }
     extra_data = {
-        'subtittle':' SUBTITULO 1',
+        'subtittle': 'Usuario',
         'decorate':decorate,
-        'login_form':LoginForm()
+        'login_form':LoginForm(),
+        'username': username,
     }
+    if login_form.validate_on_submit():
+        username = login_form.username.data
+        session['username'] = username
+        return redirect(url_for('index'))
     return render_template('hello.html',data=data,**extra_data)
 
 def decorate(string):
