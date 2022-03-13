@@ -5,12 +5,23 @@ from flask import redirect
 from flask import render_template
 from flask import session
 from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
+from wtforms.fields import StringField, PasswordField
+from wtforms.fields import SubmitField
+from wtforms.validators import DataRequired
+
 
 # __name__ Nombre del archivo
 app = Flask(__name__)
 app.config['ENV'] = 'development'
 app.config['SECRET_KEY'] = 'ANDY'
 bootstrap = Bootstrap(app)
+
+class LoginForm(FlaskForm):
+    username = StringField('Nombre de usuario', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Enviar')
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html', error=error)
@@ -26,7 +37,7 @@ def index():
 
 @app.route('/hello')
 def hello():
-    user_ip = request.session.get('user_ip')
+    user_ip = session.get('user_ip')
     #user_ip = request.cookies.get('user_ip')
     data = {
         'user_ip': user_ip,
@@ -34,7 +45,8 @@ def hello():
     }
     extra_data = {
         'subtittle':' SUBTITULO 1',
-        'decorate':decorate
+        'decorate':decorate,
+        'login_form':LoginForm()
     }
     return render_template('hello.html',data=data,**extra_data)
 

@@ -1,19 +1,38 @@
 {% import 'macros.html' as m %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% extends 'base.html' %}
 {% block title %}
     Hello Page
 {% endblock %}
 {% block content %}
-<h1>
-    {{data.tittle}}
-</h1>
-<h2>
-    {{subtittle}}
-</h2>
-<p>
-    Hello user with ip :{{ data.user_ip }}
-</p>
+<div class="container">
+<div class="row">
+    <h1>
+        {{data.tittle}}
+    </h1>
+    <h2>
+        {{subtittle}}
+    </h2>
+</div>
+<div class="row">
+    <div class="col-6">
+        <p>
+            Hello user with ip :{{ data.user_ip }}
+        </p>
+    </div>
+    <div class="col-6">
+        <img src="{{url_for('static', filename='images/example.jfif')}}" alt="hi" />
+    </div>
+</div>
 {{m.safe(decorate('ANDY'))}}
 <br>
-<img src="{{url_for('static', filename='images/example.jfif')}}" alt="hi" />
+    <form action="{{ url_for('hello') }}" method="post">
+        {{ login_form.username }}
+        {{ login_form.username.label }}
+        {{ login_form.password }}
+        {{ login_form.password.label }}
+        {{ login_form.submit }}
+    </form>
+    {{ wtf.quick_form(login_form)}}
+</div>
 {% endblock %}
