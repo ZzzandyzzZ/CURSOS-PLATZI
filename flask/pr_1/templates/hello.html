@@ -1,38 +1,39 @@
-{% import 'macros.html' as m %}
-{% import "bootstrap/wtf.html" as wtf %}
-{% extends 'base.html' %}
-{% block title %}
-    Hello Page
-{% endblock %}
-{% block content %}
+{% import 'macros.html' as m %} {% import "bootstrap/wtf.html" as wtf %} {%
+extends 'base.html' %} {% block title %} Hello Page {% endblock %} {% block
+content %}
+
 <div class="container">
-<div class="row">
-    <h1>
-        {{data.tittle}}
-    </h1>
+  <div class="row">
+    <h1>{{data.tittle}}</h1>
+  </div>
+  <div class="row"></div>
+  <div class="row">
     <h2>
-        {{subtittle}}
+      {{subtittle}} {% if username %} {{ username | capitalize }} {% endif %}
     </h2>
-</div>
-<div class="row">
-    <div class="col-6">
-        <p>
-            Hello user with ip :{{ data.user_ip }}
-        </p>
-    </div>
-    <div class="col-6">
-        <img src="{{url_for('static', filename='images/example.jfif')}}" alt="hi" />
-    </div>
-</div>
-{{m.safe(decorate('ANDY'))}}
-<br>
-    <form action="{{ url_for('hello') }}" method="post">
+  </div>
+  <div class="row">
+    {% if data.user_ip %}
+    <h3>Tu IP es {{ data.user_ip }}</h3>
+    {% else %}
+    <a href="{{ url_for('index') }}">Ir a inicio</a>
+    {% endif %}
+    <!-- <div class="col-6">
+      <img
+        src="{{url_for('static', filename='images/example.jfif')}}"
+        alt="hi"
+      />
+    </div> -->
+  </div>
+  {{m.safe(decorate('ANDY'))}}
+  <br />
+  <!-- <form action="{{ url_for('hello') }}" method="post">
         {{ login_form.username }}
         {{ login_form.username.label }}
         {{ login_form.password }}
         {{ login_form.password.label }}
         {{ login_form.submit }}
-    </form>
-    {{ wtf.quick_form(login_form)}}
+    </form> -->
+  {{ wtf.quick_form(login_form)}}
 </div>
 {% endblock %}
