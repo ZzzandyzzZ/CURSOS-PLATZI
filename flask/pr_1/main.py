@@ -5,6 +5,7 @@ from flask import redirect
 from flask import render_template
 from flask import session
 from flask import url_for
+from flask import flash
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField
@@ -54,6 +55,7 @@ def hello():
     if login_form.validate_on_submit():
         username = login_form.username.data
         session['username'] = username
+        flash(f'Nombre registrado {username}', 'danger')
         return redirect(url_for('index'))
     return render_template('hello.html',data=data,**extra_data)
 
