@@ -11,6 +11,7 @@ from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField
 from wtforms.fields import SubmitField
 from wtforms.validators import DataRequired
+import unittest
 
 # __name__ Nombre del archivo
 app = Flask(__name__)
@@ -22,6 +23,11 @@ class LoginForm(FlaskForm):
     username = StringField('Nombre de usuario', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Enviar')
+
+@app.cli.command()
+def test():
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner().run(tests)
 
 @app.errorhandler(404)
 def not_found(error):
