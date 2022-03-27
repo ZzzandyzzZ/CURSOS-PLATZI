@@ -1,14 +1,14 @@
+import unittest
+
 from flask import request
 from flask import make_response
 from flask import redirect
 from flask import render_template
 from flask import session
-from flask import url_for
-from flask import flash
-from app.forms import LoginForm
-from app import create_app
 
-import unittest
+from app import create_app
+from app.firestore_services import get_users
+from app.firestore_services import get_to_dos
 
 # __name__ Nombre del archivo
 app = create_app()
@@ -42,8 +42,15 @@ def hello():
     extra_data = {
         'subtittle': 'Usuario',
         'decorate': decorate,
+        'to_dos': get_to_dos(username),
         'username': username,
     }
+    users = get_users()
+    for user in users:
+        print(user.to_dict())
+        print(user.id)
+        print(user.to_dict()['password'])
+        print(get_to_dos(user.id))
     return render_template('hello.html',data=data,**extra_data)
 
 def decorate(string):
