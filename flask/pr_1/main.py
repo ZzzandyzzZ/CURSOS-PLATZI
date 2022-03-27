@@ -1,4 +1,3 @@
-from flask import Flask
 from flask import request
 from flask import make_response
 from flask import redirect
@@ -6,23 +5,13 @@ from flask import render_template
 from flask import session
 from flask import url_for
 from flask import flash
-from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
-from wtforms.fields import StringField, PasswordField
-from wtforms.fields import SubmitField
-from wtforms.validators import DataRequired
+from app.forms import LoginForm
+from app import create_app
+
 import unittest
 
 # __name__ Nombre del archivo
-app = Flask(__name__)
-app.config['ENV'] = 'development'
-app.config['SECRET_KEY'] = 'ANDY'
-bootstrap = Bootstrap(app)
-
-class LoginForm(FlaskForm):
-    username = StringField('Nombre de usuario', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Enviar')
+app = create_app()
 
 @app.cli.command()
 def test():
