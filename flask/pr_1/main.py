@@ -30,12 +30,10 @@ def index():
     #response.set_cookie('user_ip', user_ip)
     return response
 
-@app.route('/hello', methods=['GET', 'POST'])
+@app.route('/hello', methods=['GET'])
 def hello():
     user_ip = session.get('user_ip')
-    login_form = LoginForm()
     username = session.get('username')
-    print(user_ip)
     #user_ip = request.cookies.get('user_ip')
     data = {
         'user_ip': user_ip,
@@ -43,15 +41,9 @@ def hello():
     }
     extra_data = {
         'subtittle': 'Usuario',
-        'decorate':decorate,
-        'login_form':LoginForm(),
+        'decorate': decorate,
         'username': username,
     }
-    if login_form.validate_on_submit():
-        username = login_form.username.data
-        session['username'] = username
-        flash(f'Nombre registrado {username}', 'danger')
-        return redirect(url_for('index'))
     return render_template('hello.html',data=data,**extra_data)
 
 def decorate(string):
