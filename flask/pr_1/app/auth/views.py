@@ -12,7 +12,7 @@ from . import auth
 def home():
     return 'Hello from auth'
 
-@auth.route('/login')
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
     context = {
@@ -21,6 +21,6 @@ def login():
     if login_form.validate_on_submit():
         username = login_form.username.data
         session['username'] = username
-        flash(f'Nombre registrado {username}', 'danger')
+        flash(f'Nombre registrado {username}', 'success')
         return redirect(url_for('index'))
     return render_template('login.html', **context)
