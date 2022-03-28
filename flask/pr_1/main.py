@@ -46,11 +46,11 @@ def hello():
         'username': username,
     }
     users = get_users()
-    for user in users:
-        print(user.to_dict())
-        print(user.id)
-        print(user.to_dict()['password'])
-        print(get_to_dos(user.id))
+    # for user in users:
+    #     print(user.to_dict())
+    #     print(user.id)
+    #     print(user.to_dict()['password'])
+    #     print(get_to_dos(user.id))
     return render_template('hello.html',data=data,**extra_data)
 
 def decorate(string):

@@ -1,3 +1,7 @@
 {% macro safe(obj) %}
     {{ obj | safe }}
 {% endmacro%}
+
+{% macro render_to_do(to_do)%}
+    <li>Description: {{to_do.to_dict().description }}</li>
+{% endmacro%}
