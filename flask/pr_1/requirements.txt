@@ -3,3 +3,4 @@ Flask-Bootstrap4
 flask-wtf
 flask-testing
 firebase-admin
+flask-login

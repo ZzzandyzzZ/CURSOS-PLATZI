@@ -9,6 +9,7 @@ from flask import session
 from app import create_app
 from app.firestore_services import get_users
 from app.firestore_services import get_to_dos
+from flask_login import login_required
 
 # __name__ Nombre del archivo
 app = create_app()
@@ -31,6 +32,7 @@ def index():
     return response
 
 @app.route('/hello', methods=['GET'])
+@login_required
 def hello():
     user_ip = session.get('user_ip')
     username = session.get('username')
@@ -45,12 +47,6 @@ def hello():
         'to_dos': get_to_dos(username),
         'username': username,
     }
-    users = get_users()
-    # for user in users:
-    #     print(user.to_dict())
-    #     print(user.id)
-    #     print(user.to_dict()['password'])
-    #     print(get_to_dos(user.id))
     return render_template('hello.html',data=data,**extra_data)
 
 def decorate(string):
