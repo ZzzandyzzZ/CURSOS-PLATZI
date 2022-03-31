@@ -4,12 +4,14 @@ from firebase_admin import firestore
 
 credentials = credentials.ApplicationDefault()
 firebase_admin.initialize_app(credentials)
-# firebase_admin.initialize_app()
 
 db = firestore.client()
 
 def get_users():
     return db.collection('user').get()
+
+def get_user(user_id):
+    return db.collection('user').document(user_id).get()
 
 def get_to_dos(username):
     return db.collection('user').document(username).collection('to_do').get()
