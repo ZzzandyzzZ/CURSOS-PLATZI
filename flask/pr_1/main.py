@@ -10,6 +10,7 @@ from app import create_app
 from app.firestore_services import get_users
 from app.firestore_services import get_to_dos
 from flask_login import login_required
+from flask_login import current_user
 
 # __name__ Nombre del archivo
 app = create_app()
@@ -35,7 +36,7 @@ def index():
 @login_required
 def hello():
     user_ip = session.get('user_ip')
-    username = session.get('username')
+    username = current_user.id
     #user_ip = request.cookies.get('user_ip')
     data = {
         'user_ip': user_ip,
