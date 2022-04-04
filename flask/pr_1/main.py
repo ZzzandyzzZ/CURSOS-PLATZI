@@ -12,9 +12,11 @@ from app import create_app
 from app.firestore_services import get_users
 from app.firestore_services import get_to_dos
 from app.firestore_services import put_to_do
+from app.firestore_services import delete_to_do
 from flask_login import login_required
 from flask_login import current_user
 from app.forms import ToDoForm
+from app.forms import DeleteToDoForm
 
 
 # __name__ Nombre del archivo
@@ -53,7 +55,8 @@ def hello():
         'decorate': decorate,
         'to_dos': get_to_dos(username),
         'username': username,
-        'to_do_form': to_do_form
+        'to_do_form': to_do_form,
+        'delete_to_do_form': DeleteToDoForm(),
     }
     if to_do_form.validate_on_submit():
         put_to_do(username, to_do_form.description.data)
@@ -63,6 +66,12 @@ def hello():
 
 def decorate(string):
     return f'<strong>{string}</strong>'
+
+@app.route('/to_do/delete/<to_do_id>', methods=['POST'])
+def delete(to_do_id):
+    username = current_user.id
+    delete_to_do(username, to_do_id)
+    return redirect(url_for('hello'))
 
 if __name__ == '__main__':
     app.run(debug=True)

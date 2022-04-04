@@ -22,4 +22,9 @@ def get_to_dos(username):
 
 def put_to_do(username, description):
     to_do_ref = db.collection('user').document(username).collection('to_do')
-    to_do_ref.add({'description': description})
+    to_do_ref.add({'description': description, 'done':False})
+
+def delete_to_do(username, to_do_id):
+    to_do_ref = db.document(f'user/{username}/to_do/{to_do_id}')
+    #to_do_ref = db.collection('user').document(username).collection('to_do').document('to_do_id')
+    to_do_ref.delete()
