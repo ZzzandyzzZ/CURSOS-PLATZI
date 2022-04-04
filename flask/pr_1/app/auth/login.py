@@ -1,6 +1,5 @@
 from flask import render_template
 from flask import flash
-from flask import session
 from flask import url_for
 from flask import redirect
 from flask_login import login_user
@@ -15,8 +14,8 @@ from app.firestore_services import get_user
 from app.firestore_services import user_put
 from app.models import UserData
 from app.models import UserModel
-
 from . import auth
+
 
 @auth.route('/')
 def home():

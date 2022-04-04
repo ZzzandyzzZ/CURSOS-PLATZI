@@ -5,12 +5,17 @@ from flask import make_response
 from flask import redirect
 from flask import render_template
 from flask import session
+from flask import flash
+from flask import url_for
 
 from app import create_app
 from app.firestore_services import get_users
 from app.firestore_services import get_to_dos
+from app.firestore_services import put_to_do
 from flask_login import login_required
 from flask_login import current_user
+from app.forms import ToDoForm
+
 
 # __name__ Nombre del archivo
 app = create_app()
@@ -32,11 +37,12 @@ def index():
     #response.set_cookie('user_ip', user_ip)
     return response
 
-@app.route('/hello', methods=['GET'])
+@app.route('/hello', methods=['GET', 'POST'])
 @login_required
 def hello():
     user_ip = session.get('user_ip')
     username = current_user.id
+    to_do_form = ToDoForm()
     #user_ip = request.cookies.get('user_ip')
     data = {
         'user_ip': user_ip,
@@ -47,7 +53,12 @@ def hello():
         'decorate': decorate,
         'to_dos': get_to_dos(username),
         'username': username,
+        'to_do_form': to_do_form
     }
+    if to_do_form.validate_on_submit():
+        put_to_do(username, to_do_form.description.data)
+        flash('Tarea creada correctamente', 'success')
+        return redirect(url_for('hello'))
     return render_template('hello.html',data=data,**extra_data)
 
 def decorate(string):
