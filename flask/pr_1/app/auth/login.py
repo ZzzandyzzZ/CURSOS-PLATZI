@@ -8,6 +8,7 @@ from flask_login import current_user
 from flask_login import login_required
 from flask_login import logout_user
 from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash
 
 from app.forms import LoginForm
 from app.firestore_services import get_user
@@ -35,7 +36,7 @@ def login():
         user_doc = get_user(username)
         if user_doc.to_dict() is not None:
             db_password = user_doc.to_dict()['password']
-            if db_password == password:
+            if check_password_hash(db_password, password):
                 user_data = UserData(username, password)
                 user_model = UserModel(user_data)
                 login_user(user_model)
@@ -43,7 +44,8 @@ def login():
                 return redirect(url_for('hello'))
             else:
                 flash(f'La informacion no coincide!!!', 'danger')
-        flash(f'Usuario no encontrado!!!', 'danger')
+        else:
+            flash(f'Usuario no encontrado!!!', 'danger')
         return redirect(url_for('index'))
     return render_template('login.html', **context)
 
