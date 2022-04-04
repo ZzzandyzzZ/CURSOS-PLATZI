@@ -25,6 +25,13 @@ def put_to_do(username, description):
     to_do_ref.add({'description': description, 'done':False})
 
 def delete_to_do(username, to_do_id):
-    to_do_ref = db.document(f'user/{username}/to_do/{to_do_id}')
+    to_do_ref = get_to_do_ref(username, to_do_id)
     #to_do_ref = db.collection('user').document(username).collection('to_do').document('to_do_id')
     to_do_ref.delete()
+
+def update_to_do(username, to_do_id, done):
+    to_do_ref = get_to_do_ref(username, to_do_id)
+    to_do_ref.update({'done':not bool(done)})
+
+def get_to_do_ref(username, to_do_id):
+    return db.document(f'user/{username}/to_do/{to_do_id}')
