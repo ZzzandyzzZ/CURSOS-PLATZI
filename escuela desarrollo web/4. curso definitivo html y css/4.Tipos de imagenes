@@ -1,0 +1,19 @@
+# TIPOS DE IMAGENES
+
+## LOSSY
+    - Con perdida
+    - Perder calidad
+    - Menor tamaño, mejor tiempo de carga.
+    - Son mas pequeñas
+    - Ejemplos:
+        * JPG (Photographic Experts Group): Para fotografia, colores ilimitados.
+
+## LOSSLESS
+    - Sin perdida
+    - No pierde calidad de imagen.
+    - Son mas pesadas.
+    - Ejemplos:
+        * GIF (graphic interchange format) :256 colores
+        * PNG 8 (portable network graphic) : 256 colores,para logotipos con fondo transparente.
+        * PNG 24 : Colores ilimitados, mas pesados.
+        * SVG (Scalable Vector Graphics): Muy ligero, imagenes escalables.Para pantalla de retina.
