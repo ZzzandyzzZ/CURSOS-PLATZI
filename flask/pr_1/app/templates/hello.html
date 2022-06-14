@@ -1,0 +1,39 @@
+{% import 'macros.html' as m %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends 'base.html' %}
+{% block title %} Hello Page {% endblock %}
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <h1>{{data.tittle}}</h1>
+  </div>
+  <div class="row"></div>
+  <div class="row">
+    <h2>
+      {{subtittle}} {% if username %} {{ username | capitalize }} {% endif %}
+    </h2>
+  </div>
+  <div class="row">
+    {% if data.user_ip %}
+    <h3>Tu IP es {{ m.safe(decorate(data.user_ip)) }}</h3>
+    {% else %}
+    <a href="{{ url_for('index') }}">Ir a inicio</a>
+    {% endif %}
+  </div>
+  <div class="row">
+    <h3 class="col-12">Tu lista de tares es:</h3>
+    <ul class="col-12">
+      {% for to_do in to_dos %}
+        {{ m.render_to_do(to_do, delete_to_do_form, update_to_do_form) }}
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="row">
+    <h2>Crear tareas</h2>
+  </div>
+  <div class="list-group">
+    {{ wtf.quick_form(to_do_form)}}
+  </div>
+</div>
+{% endblock %}
