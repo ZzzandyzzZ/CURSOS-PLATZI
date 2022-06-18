@@ -1,7 +1,9 @@
 class HashTable {
+
     constructor(size){
         this.data = new Array(size);
     }
+
     hashMethod(key){
         let hash = 0;
         for(let i = 0; i < key.length;i++){
@@ -9,6 +11,7 @@ class HashTable {
         }
         return hash;
     }
+
     set(key, value){
         const address = this.hashMethod(key);
         if(!this.data[address]){
@@ -17,19 +20,10 @@ class HashTable {
         this.data[address].push([key, value]);
         return address;
     }
+
     get(key){
         const address = this.hashMethod(key);
         return this.data[address]?.find((v)=>v[0] == key)[1];
-    }
-    del(key){
-        const address = this.hashMethod(key);
-        if(this.data[address].length > 0){
-            this.data[address].forEach(element => {
-                if(element[0] === key){
-                    this.data[address] = [];
-                }
-            });
-        }
     }
 }
 
