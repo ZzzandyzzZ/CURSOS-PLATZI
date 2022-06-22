@@ -1,5 +1,19 @@
 {
   "dependencies": {
     "dotenv": "^16.0.1"
-  }
+  },
+  "devDependencies": {
+    "node-fetch": "^3.2.6"
+  },
+  "type": "module",
+  "name": "nodejs",
+  "version": "1.0.0",
+  "main": "fetch.js",
+  "scripts": {
+    "start": "node fetch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
