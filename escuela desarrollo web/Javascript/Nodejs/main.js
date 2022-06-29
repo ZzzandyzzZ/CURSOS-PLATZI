@@ -1,1 +1,1 @@
-import { log } from './utils.js';
+const log = console.log;
