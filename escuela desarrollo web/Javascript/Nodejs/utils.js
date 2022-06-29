@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 
+const log = console.log;
 const password = 'Andy';
 
 bcrypt.hash(password, 5 , (err, hash) => {
@@ -20,4 +21,5 @@ sharp('img/nodejs.png')
   .resize(20)
   .grayscale()
   .toFile('img/resized.jpg')
+
 export {log};
