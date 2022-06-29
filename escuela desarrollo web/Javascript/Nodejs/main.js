@@ -1,3 +1,1 @@
-import log from './cProcess.js';
-
-log('Hello world');
+import { log } from './utils.js';
