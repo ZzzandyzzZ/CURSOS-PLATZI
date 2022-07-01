@@ -1,16 +1,17 @@
 const success = (req, res, message, status=200) => {
-  res.status(status);
-  res.send({
-    error: '',
-    body: message,
-  });
+  res.status(status)
+      .send({
+        error: '',
+        body: message,
+      });
 };
 const error = (req, res, message, status=500, detail) => {
   console.error(detail);
-  res.send(status, {
-    error: message,
-    body: '',
-  });
+  res.status(status)
+      .send({
+        error: message,
+        body: '',
+      });
 };
 
 export {success, error};
