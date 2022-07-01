@@ -8,8 +8,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.get('/', (req, res) =>{
-  log(req.headers);
   res.header({'custom': 'value1'});
+  if (req.query.ok === 'false') {
+    error(req, res, 'Intensional error', 500, 'it was on purpose');
+  }
   success(req, res, 'Hello grom get', 200);
 });
 
