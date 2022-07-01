@@ -10,12 +10,12 @@ app.use(express.urlencoded({extended: true}));
 app.get('/', (req, res) =>{
   log(req.headers);
   res.header({'custom': 'value1'});
-  error(req, res, 'Hello grom get', 404);
+  success(req, res, 'Hello grom get', 200);
 });
 
 app.post('/', (req, res) =>{
-  log(req.body);
-  log(req.query);
+  // log(req.body);
+  // log(req.query);
   res.send({body: req.body, query: req.query});
 });
 
