@@ -1,6 +1,7 @@
 import {Router} from 'express';
 
 import {success, error} from '../../network/response.js';
+import {addMessage} from './controller.js';
 
 const router = Router();
 
@@ -13,10 +14,15 @@ router.get('/', (req, res) =>{
   success(req, res, 'Hello grom get', 200);
 });
 
-router.post('/', (req, res) =>{
-  // log(req.body);
-  // log(req.query);
-  res.send({body: req.body, query: req.query});
+router.post('/', async (req, res) =>{
+  const body = req.body;
+  let fullMessage;
+  try {
+    fullMessage = await addMessage(body.user, body.message);
+  } catch (e) {
+    return error(req, res, 'Incomplete data', 400, e.message);
+  }
+  success(req, res, fullMessage);
 });
 
 export default router;

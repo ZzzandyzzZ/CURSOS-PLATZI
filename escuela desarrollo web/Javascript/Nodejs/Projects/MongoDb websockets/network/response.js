@@ -6,7 +6,7 @@ const success = (req, res, message, status=200) => {
       });
 };
 const error = (req, res, message, status=500, detail) => {
-  console.error(detail);
+  console.error('ERROR', detail);
   res.status(status)
       .send({
         error: message,
