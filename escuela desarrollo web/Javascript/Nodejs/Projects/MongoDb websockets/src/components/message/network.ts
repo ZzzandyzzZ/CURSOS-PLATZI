@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { success, error } from '../../network/response';
-import addMessage from './controller';
+import { addMessage, Message } from './controller';
 
 const router = Router();
 
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
   const { body } = req;
-  let fullMessage;
+  let fullMessage:Message;
   try {
     fullMessage = await addMessage(body.user, body.message);
   } catch (e) {
