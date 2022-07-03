@@ -14,8 +14,8 @@ module.exports = {
   plugins: [
     '@typescript-eslint'
   ],
-  ignorePatterns: ['/build'],
+  ignorePatterns: ['/build', '**/*.html'],
   rules: {
-    semi: 0
+    semi: [2, 'always']
   }
 }

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "build": "tsc",
-    "start": "node build/index.js",
+    "start": "node build/server.js",
+    "lint": "eslint \"./src/**\"",
     "startn": "nodemon -L -x 'clear;node' server.js",
     "startc": "nodemon -L server.js"
   },
