@@ -1,8 +1,4 @@
-interface Message {
-  user: string,
-  message: string,
-  date: Date,
-};
+import { Message } from '../../types';
 
 const addMessage = (user:string, message:string):Promise<Message> => new Promise(
   (resolve, reject) => {

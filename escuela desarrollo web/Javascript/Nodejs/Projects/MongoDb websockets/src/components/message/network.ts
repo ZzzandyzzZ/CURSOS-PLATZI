@@ -1,7 +1,8 @@
 import { Router } from 'express';
 
 import { success, error } from '../../network/response';
-import { addMessage, Message } from './controller';
+import { addMessage } from './controller';
+import { Message } from '../../types';
 
 const router = Router();
 
