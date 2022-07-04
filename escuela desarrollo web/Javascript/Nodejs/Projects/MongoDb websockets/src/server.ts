@@ -3,7 +3,7 @@ import express, { Application } from 'express';
 import routes from './network/routes';
 
 const app:Application = express();
-const port:number = 3000;
+const port = 3000;
 
 console.clear();
 app.use(express.json());

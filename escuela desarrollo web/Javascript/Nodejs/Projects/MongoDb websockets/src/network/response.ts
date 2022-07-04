@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-const success = (_req:Request, res:Response, message:Object, status = 200):void => {
+const success = (_req:Request, res:Response, message:unknown, status = 200):void => {
   res.status(status)
     .send({
       error: '',
