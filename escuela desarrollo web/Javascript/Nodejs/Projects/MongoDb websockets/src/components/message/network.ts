@@ -1,29 +1,27 @@
 import { Router } from 'express';
 
 import { success, error } from '../../network/response';
-import { addMessage } from './controller';
-import { Message } from '../../types';
+import * as ctrMessage from './controller';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.header({ custom: 'value1' });
-  if (req.query.ok === 'false') {
-    error(req, res, 'Intensional error', 500, 'it was on purpose');
-    return;
+router.get('/', async (req, res) => {
+  try {
+    const messages = await ctrMessage.list();
+    success(req, res, messages, 200);
+  } catch (e) {
+    error(req, res, 'Internal error', 500, e.message);
   }
-  success(req, res, 'Hello grom get', 200);
 });
 
 router.post('/', async (req, res) => {
   const { body } = req;
-  let fullMessage:Message;
   try {
-    fullMessage = await addMessage(body.user, body.message);
+    const fullMessage = await ctrMessage.add(body.user, body.message);
+    return success(req, res, fullMessage);
   } catch (e) {
     return error(req, res, 'Incomplete data', 400, e.message);
   }
-  return success(req, res, fullMessage);
 });
 
 export default router;
