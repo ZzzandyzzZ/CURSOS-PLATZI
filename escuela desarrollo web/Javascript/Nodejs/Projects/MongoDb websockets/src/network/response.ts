@@ -4,7 +4,7 @@ const success = (_req:Request, res:Response, message:unknown, status = 200):void
   res.status(status)
     .send({
       error: '',
-      body: message
+      body: message,
     });
 };
 const error = (_req:Request, res:Response, message:string, status = 500, detail = ''):void => {
@@ -12,7 +12,7 @@ const error = (_req:Request, res:Response, message:string, status = 500, detail 
   res.status(status)
     .send({
       error: message,
-      body: ''
+      body: '',
     });
 };
 

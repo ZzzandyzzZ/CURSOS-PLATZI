@@ -10,11 +10,11 @@ const addMessage = (user:string, message:string):Promise<Message> => new Promise
     const fullMessage:Message = {
       user,
       message,
-      date: new Date()
+      date: new Date(),
     };
     str.addMessage(fullMessage);
     resolve(fullMessage);
-  }
+  },
 );
 
 const listMessages = ():Promise<Array<Message>> => new Promise(
@@ -24,7 +24,7 @@ const listMessages = ():Promise<Array<Message>> => new Promise(
     } catch (e) {
       reject(e);
     }
-  }
+  },
 );
 
 export { addMessage, listMessages };
