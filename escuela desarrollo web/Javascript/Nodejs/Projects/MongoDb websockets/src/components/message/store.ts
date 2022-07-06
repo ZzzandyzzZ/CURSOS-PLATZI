@@ -8,4 +8,4 @@ const addMessage = (message:Message) => {
 const listMessages = ():Array<Message> => {
   return list;
 };
-export { addMessage as add, listMessages as list };
+export { addMessage, listMessages };

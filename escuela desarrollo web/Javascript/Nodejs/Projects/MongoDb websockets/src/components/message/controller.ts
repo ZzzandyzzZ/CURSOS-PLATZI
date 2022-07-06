@@ -1,6 +1,6 @@
 import { Message } from '../../types';
 
-import * as strMessage from './store';
+import * as str from './store';
 
 const addMessage = (user:string, message:string):Promise<Message> => new Promise(
   (resolve, reject) => {
@@ -12,7 +12,7 @@ const addMessage = (user:string, message:string):Promise<Message> => new Promise
       message,
       date: new Date()
     };
-    strMessage.add(fullMessage);
+    str.addMessage(fullMessage);
     resolve(fullMessage);
   }
 );
@@ -20,11 +20,11 @@ const addMessage = (user:string, message:string):Promise<Message> => new Promise
 const listMessages = ():Promise<Array<Message>> => new Promise(
   (resolve, reject) => {
     try {
-      resolve(strMessage.list());
+      resolve(str.listMessages());
     } catch (e) {
       reject(e);
     }
   }
 );
 
-export { addMessage as add, listMessages as list };
+export { addMessage, listMessages };
