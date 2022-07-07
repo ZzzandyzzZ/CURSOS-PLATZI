@@ -8,7 +8,7 @@ const success = (_req:Request, res:Response, message:unknown, status = 200):void
     });
 };
 const error = (_req:Request, res:Response, message:string, status = 500, detail = ''):void => {
-  console.error('ERROR', detail);
+  if (detail) console.error('ERROR', detail);
   res.status(status)
     .send({
       error: message,

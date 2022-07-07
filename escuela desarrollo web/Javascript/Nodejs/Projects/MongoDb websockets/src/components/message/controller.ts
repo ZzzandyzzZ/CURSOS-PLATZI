@@ -1,6 +1,8 @@
-import { Message } from '../../types';
+import { Request, Response } from 'express';
 
+import { Message } from '../../types';
 import * as str from './store';
+import { success, error } from '../../network/response';
 
 const addMessage = (user:string, message:string):Promise<Message> => new Promise(
   (resolve, reject) => {
@@ -27,4 +29,18 @@ const listMessages = ():Promise<Array<Message>> => new Promise(
   },
 );
 
-export { addMessage, listMessages };
+const updateMessage = async (req:Request, res:Response) => {
+  const msgId = req.params.id;
+  const msgText = req.body.text;
+  if (!msgId || !msgText) {
+    return error(req, res, 'Incomplete data', 400);
+  }
+  try {
+    const updatedMsg = await str.updateMessage(msgId, msgText);
+    return success(req, res, updatedMsg);
+  } catch (e) {
+    return error(req, res, 'Cannot update', 400, e.message);
+  }
+};
+
+export { addMessage, listMessages, updateMessage };

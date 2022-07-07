@@ -21,4 +21,15 @@ const listMessages = async ():Promise<Array<Message>> => {
   const data:Array<Message> = await MsjModel.find({});
   return data;
 };
-export { addMessage, listMessages };
+
+const updateMessage = async (id:string, text:string) => {
+  const msg = await MsjModel.findById(id);
+  if (!msg) {
+    throw new Error('Id not found');
+  }
+  msg.message = text;
+  const updatedMsg = await msg.save();
+  return updatedMsg;
+};
+
+export { addMessage, listMessages, updateMessage };

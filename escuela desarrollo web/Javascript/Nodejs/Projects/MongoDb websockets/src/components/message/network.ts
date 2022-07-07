@@ -24,4 +24,6 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.patch('/:id', ctrl.updateMessage);
+
 export default router;
