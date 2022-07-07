@@ -10,7 +10,6 @@ const listChats = (userId:string) => new Promise(
   (resolve, reject) => {
     let filter = {};
     if (userId) filter = { users: userId };
-    console.log('filter', filter);
     ChatModel
       .find(filter)
       .populate('users')

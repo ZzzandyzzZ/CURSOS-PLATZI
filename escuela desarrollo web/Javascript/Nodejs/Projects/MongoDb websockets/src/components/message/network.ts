@@ -8,9 +8,6 @@ const router = Router();
 router.get('/', async (req, res) => {
   const filterUserMsg:string = req.query.user as string;
   const filterChatMsg:string = req.query.chat as string;
-  // const filter = (filterUserMsg || filterChatMsg)
-  //   ? { user: filterUserMsg, chat: filterChatMsg }
-  //   : {};
   const filter = {
     ...filterUserMsg && { user: filterUserMsg },
     ...filterChatMsg && { chat: filterChatMsg },
