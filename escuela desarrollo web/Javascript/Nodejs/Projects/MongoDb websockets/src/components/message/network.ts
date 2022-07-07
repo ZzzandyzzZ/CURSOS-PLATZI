@@ -27,4 +27,6 @@ router.post('/', async (req, res) => {
 
 router.patch('/:id', ctrl.updateMessage);
 
+router.delete('/:id', ctrl.deleteMessage);
+
 export default router;

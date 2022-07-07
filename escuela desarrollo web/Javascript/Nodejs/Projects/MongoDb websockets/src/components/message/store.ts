@@ -36,4 +36,12 @@ const updateMessage = async (id:string, text:string) => {
   return updatedMsg;
 };
 
-export { addMessage, listMessages, updateMessage };
+const deleteMessage = async (id:string) => {
+  // const deleteState = await MsjModel.deleteOne({
+  //   _id: id,
+  // });
+  const deleteState = await MsjModel.findByIdAndDelete(id);
+  return deleteState;
+};
+
+export { addMessage, listMessages, updateMessage, deleteMessage };

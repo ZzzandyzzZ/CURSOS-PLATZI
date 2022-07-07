@@ -43,4 +43,16 @@ const updateMessage = async (req:Request, res:Response) => {
   }
 };
 
-export { addMessage, listMessages, updateMessage };
+const deleteMessage = async (req:Request, res:Response) => {
+  const msgId = req.params.id;
+  try {
+    const deletedMsg = await str.deleteMessage(msgId);
+    return (deletedMsg)
+      ? success(req, res, deletedMsg)
+      : error(req, res, 'Message not found', 404);
+  } catch (e) {
+    return error(req, res, 'Cannot update', 400, e.message);
+  }
+};
+
+export { addMessage, listMessages, updateMessage, deleteMessage };
