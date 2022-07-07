@@ -1,7 +1,8 @@
 const config = {
   dbUrl: '',
   port: 3000,
-  domain: 'locahost',
+  host: 'locahost',
+  publicPath: 'app',
 };
 
 export default config;
