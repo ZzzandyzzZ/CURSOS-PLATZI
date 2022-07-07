@@ -7,7 +7,7 @@ import * as ctrl from './controller';
 const router = Router();
 const storage = multer.diskStorage({
   destination: function (_req, _file, cb) {
-    cb(null, 'uploads/');
+    cb(null, 'src/public/files/');
   },
   filename: function (_req, file, cb) {
     cb(null, file.originalname);

@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 routes(app);
 
-app.use('/app', express.static('public'));
+app.use('/app', express.static('src/public'));
 
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}`);
