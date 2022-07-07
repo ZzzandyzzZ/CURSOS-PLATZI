@@ -1,9 +1,19 @@
 import { Router } from 'express';
+import multer from 'multer';
 
 import { success, error } from '../../network/response';
 import * as ctrl from './controller';
 
 const router = Router();
+const storage = multer.diskStorage({
+  destination: function (_req, _file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (_req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage });
 
 router.get('/', async (req, res) => {
   const filterUserMsg:string = req.query.user as string;
@@ -20,7 +30,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', upload.single('file'), async (req, res) => {
   const { user, message, chat } = req.body;
   try {
     const fullMessage = await ctrl.addMessage(user, message, chat);
