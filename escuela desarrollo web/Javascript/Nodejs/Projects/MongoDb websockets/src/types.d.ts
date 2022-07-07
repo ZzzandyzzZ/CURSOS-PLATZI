@@ -4,6 +4,10 @@ export interface Message {
   date: Date,
 }
 
+export interface User {
+  name: string,
+}
+
 export type Msg = 'error' | 'ok';
 
 export enum Enum {
