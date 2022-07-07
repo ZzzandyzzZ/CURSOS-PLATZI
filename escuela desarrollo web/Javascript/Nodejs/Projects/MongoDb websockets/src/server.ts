@@ -1,11 +1,14 @@
 import express, { Application } from 'express';
 
 import routes from './network/routes';
+import db from './db';
 
+console.clear();
 const app:Application = express();
 const port = 3000;
 
-console.clear();
+db();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
