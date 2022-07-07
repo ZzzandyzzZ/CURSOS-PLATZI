@@ -1,11 +1,11 @@
-export interface Message {
-  user: string,
-  message: string,
-  date: Date,
-}
-
 export interface User {
   name: string,
+}
+
+export interface Message {
+  user: Mongoose.Types.ObjectId,
+  message: string,
+  date: Date,
 }
 
 export type Msg = 'error' | 'ok';

@@ -6,14 +6,19 @@ const addMessage = (message:Message) => {
   newMessage.save();
 };
 
-const listMessages = async (filterMessages:string):Promise<Array<Message>> => {
+const listMessages = (filterMessages:string) => new Promise((resolve, reject) => {
   let filter = {};
   if (filterMessages) {
     filter = { user: filterMessages };
   }
-  const data:Array<Message> = await MsjModel.find(filter);
-  return data;
-};
+  MsjModel
+    .find(filter)
+    .populate('user')
+    .exec((err, populated) => {
+      if (err) return reject(err);
+      resolve(populated);
+    });
+});
 
 const updateMessage = async (id:string, text:string) => {
   const msg = await MsjModel.findById(id);

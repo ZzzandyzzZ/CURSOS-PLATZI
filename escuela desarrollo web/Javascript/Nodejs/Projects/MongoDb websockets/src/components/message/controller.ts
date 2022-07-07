@@ -19,15 +19,9 @@ const addMessage = (user:string, message:string):Promise<Message> => new Promise
   },
 );
 
-const listMessages = (filterMessages:string):Promise<Array<Message>> => new Promise(
-  (resolve, reject) => {
-    try {
-      resolve(str.listMessages(filterMessages));
-    } catch (e) {
-      reject(e);
-    }
-  },
-);
+const listMessages = (filterMessages:string) => {
+  return str.listMessages(filterMessages);
+};
 
 const updateMessage = async (req:Request, res:Response) => {
   const msgId = req.params.id;
