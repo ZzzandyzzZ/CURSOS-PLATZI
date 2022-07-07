@@ -4,12 +4,13 @@ import { Message } from '../../types';
 import * as str from './store';
 import { success, error } from '../../network/response';
 
-const addMessage = (user:string, message:string):Promise<Message> => new Promise(
+const addMessage = (user:string, message:string, chat:string):Promise<Message> => new Promise(
   (resolve, reject) => {
-    if (!user || !message) {
+    if (!user || !message || !chat) {
       return reject(new Error('User or message is missing'));
     }
     const fullMessage:Message = {
+      chat,
       user,
       message,
       date: new Date(),
@@ -19,8 +20,8 @@ const addMessage = (user:string, message:string):Promise<Message> => new Promise
   },
 );
 
-const listMessages = (filterMessages:string) => {
-  return str.listMessages(filterMessages);
+const listMessages = (filter:object) => {
+  return str.listMessages(filter);
 };
 
 const updateMessage = async (req:Request, res:Response) => {

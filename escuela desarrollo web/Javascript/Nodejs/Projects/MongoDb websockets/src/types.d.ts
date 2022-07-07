@@ -3,9 +3,14 @@ export interface User {
 }
 
 export interface Message {
+  chat: Mongoose.Types.ObjectId,
   user: Mongoose.Types.ObjectId,
   message: string,
   date: Date,
+}
+
+export interface Chat {
+  users: Array<Mongoose.Types.ObjectId>
 }
 
 export type Msg = 'error' | 'ok';

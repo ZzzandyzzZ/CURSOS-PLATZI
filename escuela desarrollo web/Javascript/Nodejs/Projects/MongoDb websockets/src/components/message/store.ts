@@ -6,11 +6,8 @@ const addMessage = (message:Message) => {
   newMessage.save();
 };
 
-const listMessages = (filterMessages:string) => new Promise((resolve, reject) => {
-  let filter = {};
-  if (filterMessages) {
-    filter = { user: filterMessages };
-  }
+const listMessages = (filter:object) => new Promise((resolve, reject) => {
+  console.log(filter);
   MsjModel
     .find(filter)
     .populate('user')
