@@ -17,8 +17,12 @@ const addMessage = (message:Message) => {
   newMessage.save();
 };
 
-const listMessages = async ():Promise<Array<Message>> => {
-  const data:Array<Message> = await MsjModel.find({});
+const listMessages = async (filterMessages:string):Promise<Array<Message>> => {
+  let filter = {};
+  if (filterMessages) {
+    filter = { user: filterMessages };
+  }
+  const data:Array<Message> = await MsjModel.find(filter);
   return data;
 };
 

@@ -19,10 +19,10 @@ const addMessage = (user:string, message:string):Promise<Message> => new Promise
   },
 );
 
-const listMessages = ():Promise<Array<Message>> => new Promise(
+const listMessages = (filterMessages:string):Promise<Array<Message>> => new Promise(
   (resolve, reject) => {
     try {
-      resolve(str.listMessages());
+      resolve(str.listMessages(filterMessages));
     } catch (e) {
       reject(e);
     }

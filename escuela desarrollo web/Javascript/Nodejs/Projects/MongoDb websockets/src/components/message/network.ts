@@ -6,8 +6,9 @@ import * as ctrl from './controller';
 const router = Router();
 
 router.get('/', async (req, res) => {
+  const filterMessages:string = req.query.user as string;
   try {
-    const messages = await ctrl.listMessages();
+    const messages = await ctrl.listMessages(filterMessages);
     success(req, res, messages, 200);
   } catch (e) {
     error(req, res, 'Internal error', 500, e.message);
