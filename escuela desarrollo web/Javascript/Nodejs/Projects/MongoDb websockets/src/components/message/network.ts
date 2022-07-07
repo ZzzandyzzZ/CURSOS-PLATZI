@@ -32,8 +32,9 @@ router.get('/', async (req, res) => {
 
 router.post('/', upload.single('file'), async (req, res) => {
   const { user, message, chat } = req.body;
+  const file = req.file;
   try {
-    const fullMessage = await ctrl.addMessage(user, message, chat);
+    const fullMessage = await ctrl.addMessage(user, message, chat, file);
     return success(req, res, fullMessage);
   } catch (e) {
     return error(req, res, 'Incomplete data', 400, e.message);

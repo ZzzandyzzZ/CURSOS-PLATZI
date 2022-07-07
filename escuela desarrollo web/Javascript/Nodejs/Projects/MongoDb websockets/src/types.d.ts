@@ -6,6 +6,7 @@ export interface Message {
   chat: Mongoose.Types.ObjectId,
   user: Mongoose.Types.ObjectId,
   message: string,
+  fileUrl: string,
   date: Date,
 }
 

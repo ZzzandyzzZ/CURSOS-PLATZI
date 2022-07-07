@@ -13,6 +13,7 @@ const msjSchema = new Schema({
     type: String,
     required: true,
   },
+  fileUrl: String,
   date: Date,
 });
 
