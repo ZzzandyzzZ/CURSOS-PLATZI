@@ -1,5 +1,6 @@
 import express, { Application } from 'express';
 import http from 'http';
+import cors from 'cors';
 
 import { connect } from './socket';
 import routes from './network/routes';
@@ -12,6 +13,7 @@ const server = http.createServer(app);
 connect(server);
 db();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
