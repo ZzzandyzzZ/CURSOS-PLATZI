@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { Message } from '../../types';
 import * as str from './store';
 import { success, error } from '../../network/response';
+import { socket } from '../../socket';
 
 const addMessage = (user:string, message:string, chat:string, file?:Express.Multer.File):Promise<Message> => new Promise(
   (resolve, reject) => {
@@ -20,6 +21,7 @@ const addMessage = (user:string, message:string, chat:string, file?:Express.Mult
       date: new Date(),
     };
     str.addMessage(fullMessage);
+    socket.io.emit('message', fullMessage);
     resolve(fullMessage);
   },
 );
