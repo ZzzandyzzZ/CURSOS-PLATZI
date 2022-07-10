@@ -17,8 +17,8 @@ const options = {
     } else {
       callback(new Error('no permitido'));
     }
-  }
-}
+  },
+};
 app.use(cors(options));
 
 app.get('/', (req, res) => {
@@ -35,7 +35,6 @@ app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
-
 app.listen(port, () => {
-  console.log('Mi port' +  port);
+  console.log(`Mi port${port}`);
 });
