@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
@@ -21,6 +22,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^5.5.3",
-    "joi": "^17.4.2"
+    "joi": "^17.4.2",
+    "pg": "^8.7.3"
   }
 }

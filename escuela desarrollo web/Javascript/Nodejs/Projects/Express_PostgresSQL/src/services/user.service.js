@@ -1,12 +1,14 @@
-class UserService {
-  constructor() {}
+import getConnection from '../libs/postgres';
 
+class UserService {
   async create(data) {
     return data;
   }
 
   async find() {
-    return [];
+    this.client = await getConnection();
+    const response = await this.client.query('SELECT * FROM task');
+    return response.rows;
   }
 
   async findOne(id) {
@@ -25,4 +27,4 @@ class UserService {
   }
 }
 
-module.exports = UserService;
+export default UserService;
