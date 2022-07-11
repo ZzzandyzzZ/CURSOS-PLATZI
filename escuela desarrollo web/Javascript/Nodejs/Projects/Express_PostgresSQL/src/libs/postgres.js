@@ -1,7 +1,7 @@
-import { Client } from 'pg';
+import pg from 'pg';
 
 const getConnection = async () => {
-  const client = new Client({
+  const client = new pg.Client({
     host: 'localhost',
     port: 5432,
     user: 'andy',

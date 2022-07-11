@@ -1,4 +1,4 @@
-import getConnection from '../libs/postgres';
+import getConnection from '../libs/postgres.js';
 
 class UserService {
   async create(data) {
